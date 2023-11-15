@@ -4,32 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fdc1d3d-9240-4b94-bfbc-2b92a7ce0aef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SerMaisTech-LP1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aulas/basic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aulas/basic_com_input.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aulas/input_scanner_while.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aulas/notas_aula_variaveis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aulas/somar_arg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aulas/variaveis.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Aulas/while_doWhile_for.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_2_ex4d.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_3_baskara.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_4_imc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_5_ex2a.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_5_ex2b.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_5_ex3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_5_hw1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_5_hw2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_5_hw3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_5_hw4.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_5_hw7.java" afterDir="false" />
+    <list default="true" id="8fdc1d3d-9240-4b94-bfbc-2b92a7ce0aef" name="Changes" comment="First commit">
+      <change afterPath="$PROJECT_DIR$/src/Aulas/juntar_arrays.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Aulas/limpar_console.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Aulas/matrizes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Desafios/projeto_bingo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Aulas/input_scanner_while.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Aulas/input_scanner_while.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,65 +27,26 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2Y7rMluzP8JdfSOJZhEHAACdkVe" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.basic_com_input">
-    <configuration name="aula_5_hw3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Desafios.aula_5_hw3" />
-      <module name="SerMaisTech-LP1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Desafios.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="aula_5_hw4" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Desafios.aula_5_hw4" />
-      <module name="SerMaisTech-LP1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Desafios.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="aula_5_hw7" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Desafios.aula_5_hw7" />
-      <module name="SerMaisTech-LP1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Desafios.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="basic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Aulas.basic" />
+}</component>
+  <component name="RunManager" selected="Application.input_scanner_while">
+    <configuration name="input_scanner_while" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Aulas.input_scanner_while" />
       <module name="SerMaisTech-LP1" />
       <extension name="coverage">
         <pattern>
@@ -116,20 +58,65 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="basic_com_input" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Aulas.basic_com_input" />
+    <configuration name="juntar_arrays" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Aulas.juntar_arrays" />
       <module name="SerMaisTech-LP1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Aulas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="limpar_console" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Aulas.limpar_console" />
+      <module name="SerMaisTech-LP1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Aulas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="matrizes" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Aulas.matrizes" />
+      <module name="SerMaisTech-LP1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Aulas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="projeto_bingo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Desafios.projeto_bingo" />
+      <module name="SerMaisTech-LP1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Desafios.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.basic_com_input" />
-        <item itemvalue="Application.basic" />
-        <item itemvalue="Application.aula_5_hw7" />
-        <item itemvalue="Application.aula_5_hw4" />
-        <item itemvalue="Application.aula_5_hw3" />
+        <item itemvalue="Application.input_scanner_while" />
+        <item itemvalue="Application.limpar_console" />
+        <item itemvalue="Application.matrizes" />
+        <item itemvalue="Application.projeto_bingo" />
+        <item itemvalue="Application.juntar_arrays" />
       </list>
     </recent_temporary>
   </component>
@@ -142,6 +129,15 @@
       <option name="presentableId" value="Default" />
       <updated>1699887415229</updated>
     </task>
+    <task id="LOCAL-00001" summary="First commit">
+      <option name="closed" value="true" />
+      <created>1699901428060</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699901428060</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,5 +162,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="First commit" />
   </component>
 </project>
