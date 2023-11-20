@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fdc1d3d-9240-4b94-bfbc-2b92a7ce0aef" name="Changes" comment="updates no desafio do bingo">
+    <list default="true" id="8fdc1d3d-9240-4b94-bfbc-2b92a7ce0aef" name="Changes" comment="adição de acertos por jogador">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Desafios/projeto_bingo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desafios/projeto_bingo.java" afterDir="false" />
     </list>
@@ -165,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700350928123</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="adição de acertos por jogador">
+      <option name="closed" value="true" />
+      <created>1700410720443</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1700410720443</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -197,6 +205,7 @@
     <MESSAGE value="Codificando Desafio Bingo" />
     <MESSAGE value="Codificando Desafio Bingo e novos arquivos" />
     <MESSAGE value="updates no desafio do bingo" />
-    <option name="LAST_COMMIT_MESSAGE" value="updates no desafio do bingo" />
+    <MESSAGE value="adição de acertos por jogador" />
+    <option name="LAST_COMMIT_MESSAGE" value="adição de acertos por jogador" />
   </component>
 </project>
