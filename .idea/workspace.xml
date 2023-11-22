@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8fdc1d3d-9240-4b94-bfbc-2b92a7ce0aef" name="Changes" comment="adição de acertos por jogador">
+    <list default="true" id="8fdc1d3d-9240-4b94-bfbc-2b92a7ce0aef" name="Changes" comment="inclusão do relatório final">
+      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_7_baseNumerica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Desafios/aula_7_matriz.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Desafios/projeto_bingo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desafios/projeto_bingo.java" afterDir="false" />
     </list>
@@ -22,6 +24,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -67,12 +72,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="input_scanner_while" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Aulas.input_scanner_while" />
+    <configuration name="aula_7_Matriz" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Desafios.aula_7_Matriz" />
       <module name="SerMaisTech-LP1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Aulas.*" />
+          <option name="PATTERN" value="Desafios.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -80,12 +85,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="limpar_console" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Aulas.limpar_console" />
+    <configuration name="aula_7_matriz" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Desafios.aula_7_matriz" />
       <module name="SerMaisTech-LP1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Aulas.*" />
+          <option name="PATTERN" value="Desafios.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -109,10 +114,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.projeto_bingo" />
+        <item itemvalue="Application.aula_7_matriz" />
+        <item itemvalue="Application.aula_7_Matriz" />
         <item itemvalue="Application.MultiplayerBingo" />
         <item itemvalue="Application.Divisao" />
-        <item itemvalue="Application.input_scanner_while" />
-        <item itemvalue="Application.limpar_console" />
       </list>
     </recent_temporary>
   </component>
@@ -173,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700410720443</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="inclusão do relatório final">
+      <option name="closed" value="true" />
+      <created>1700520667012</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1700520667012</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,6 +219,7 @@
     <MESSAGE value="Codificando Desafio Bingo e novos arquivos" />
     <MESSAGE value="updates no desafio do bingo" />
     <MESSAGE value="adição de acertos por jogador" />
-    <option name="LAST_COMMIT_MESSAGE" value="adição de acertos por jogador" />
+    <MESSAGE value="inclusão do relatório final" />
+    <option name="LAST_COMMIT_MESSAGE" value="inclusão do relatório final" />
   </component>
 </project>

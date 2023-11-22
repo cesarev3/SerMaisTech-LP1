@@ -81,6 +81,7 @@ public class projeto_bingo {
             rodadas ++;
 
             System.out.println("Tecle 'S' para nova rodada ou 'X' para sair");
+            System.out.print("> ");
             continua = Character.toUpperCase(entrada.next().charAt(0));
 
         }
@@ -90,29 +91,41 @@ public class projeto_bingo {
         }
 
         System.out.println("Tecle R para relatório ou X para sair do jogo");
+        System.out.print("> ");
         char relatorio = Character.toUpperCase(entrada.next().charAt(0));
 
        if (relatorio == 'R') {
             System.out.println("\n\n---------------- Relatório ----------------");
         }
 
-        System.out.println("Numero de rodadas: " + (rodadas + 1));
+       System.out.println("\nNumero de rodadas: " + (rodadas + 1));
+
+       System.out.println("\nGanhadores:");
        String[] ganhadores = listarVencedor(rankingDosJogadores, controle);
-       int[][] cartelasVencedores = listarCartelaVencedora(ganhadores, nomeJogadores, cartelasGeradas, controle);
 
-        for (int i = 0; i < ganhadores.length; i++) {
-            System.out.print(ganhadores[i] + " = {");
-            for (int j = 0; j < dezenasPorCartela; j++) {
-                if (j < (dezenasPorCartela -1)) {
-                    System.out.print(cartelasVencedores[i][j] + ", ");
-                } else {
-                    System.out.print(cartelasVencedores[i][j] + "}");
-                }
+       int[][] cartelasVencedores = listarCartelaVencedora(ganhadores,
+               nomeJogadores, cartelasGeradas, controle);
 
-            }
-            System.out.print("}\n");
-        }
+        imprimirGanhadores(ganhadores, dezenasPorCartela, cartelasVencedores);
 
+        imprimirTodasDezenasSorteadas(rodadas, dezenasPorSorteio, dezenasOrdenadas);
+
+        int[] rankingAcertos = new int[quantidadeJogadores];
+        ordenarRankingAcertos(quantidadeJogadores, rankingAcertos, tabelaDeAcertos);
+
+        System.out.println("\nRanking geral:");
+
+        imprimirTresColunas(rankingDosJogadores, rankingAcertos, controle);
+
+        System.out.println("\nObrigado por jogar!");
+
+        entrada.close();
+
+    }
+
+    private static void imprimirTodasDezenasSorteadas(int rodadas,
+                                                      int dezenasPorSorteio,
+                                                      int[] dezenasOrdenadas) {
 
         int limite = (rodadas + 1) * dezenasPorSorteio;
         int[] totalDezenasSorteadas = new int[limite];
@@ -122,17 +135,21 @@ public class projeto_bingo {
         }
         Arrays.sort(totalDezenasSorteadas);
 
-        System.out.print("Dezenas Sorteadas: {");
+        System.out.print("\nDezenas Sorteadas:\n{");
 
         for (int i = 0; i < (limite); i++) {
             if (i < (limite - 1)) {
                 System.out.print(totalDezenasSorteadas[i] + ", ");
             }else {
-                System.out.print(totalDezenasSorteadas[i] + "}");
+                System.out.print(totalDezenasSorteadas[i] + "}\n");
             }
         }
+    }
 
-        int[] rankingAcertos = new int[quantidadeJogadores];
+    private static void ordenarRankingAcertos(int quantidadeJogadores,
+                                              int[] rankingAcertos,
+                                              int[] tabelaDeAcertos) {
+
         for (int i = 0; i < quantidadeJogadores; i++) {
             rankingAcertos[i] = tabelaDeAcertos[i] * -1;
         }
@@ -141,29 +158,39 @@ public class projeto_bingo {
         for (int i = 0; i < quantidadeJogadores; i++) {
             rankingAcertos[i] = rankingAcertos[i] * -1;
         }
+    }
 
-        System.out.println("\nRanking geral");
+    private static void imprimirGanhadores(String[] ganhadores,
+                                           int dezenasPorCartela,
+                                           int[][] cartelasVencedores) {
 
-        for (int i = 0; i < quantidadeJogadores; i++) {
-            System.out.println("Posição " + (i + 1) + " = " + rankingDosJogadores[i] + " com " + rankingAcertos[i] + " acertos");
-
+        for (int i = 0; i < ganhadores.length; i++) {
+            System.out.print(ganhadores[i] + " = {");
+            for (int j = 0; j < dezenasPorCartela; j++) {
+                if (j < (dezenasPorCartela -1)) {
+                    System.out.print(cartelasVencedores[i][j] + ", ");
+                } else {
+                    System.out.print(cartelasVencedores[i][j] + "}");
+                }
+            }
+            System.out.print("\n");
         }
-
-
-
-
-
-        entrada.close();
-
     }
 
     private static void imprimirTelaWelcome() {
-        System.out.println("------------------------------------------------");
-        System.out.println("|       Welcome to the 50+'s Bingo Party!      |");
-        System.out.println("------------------------------------------------");
+        System.out.println("|-----------------------------------------------" +
+                "--------------------|");
+        System.out.println("|                                               " +
+                "                    |");
+        System.out.println("|                  Welcome to the 50's Bingo Par" +
+                "ty!                 |");
+        System.out.println("|                                               " +
+                "                    |");
+        System.out.println("|-----------------------------------------------" +
+                "--------------------|");
         System.out.println("\nHora de chamar seus colegas!");
-        System.out.println("\ndigite o primeiro nome de todos na mesma linha e");
-        System.out.println("use '-' entre eles. Ex. Ana-Carlos-Marcola-Paula");
+        System.out.println("\nDigite o primeiro nome de todos na mesma linha e use '-' entre eles");
+        System.out.println("Ex. Ana-Carlos-Marcola-Paula");
         System.out.print("> ");
     }
 
@@ -180,6 +207,61 @@ public class projeto_bingo {
                     System.out.printf("%2d}", inputCartela[valorI][j]);
                 }
             }
+    }
+
+    public static void imprimirTresColunas(String[] inputJogadores,
+                                           int[] inputAcertos,
+                                           int[] controle) {
+
+        int totalJogadores = controle[4];
+        int limite;
+        System.out.print("|---------------------------------------|-------" +
+                "--------------------------------|--------------------------" +
+                "-------------|\n");
+        System.out.print("|\tPosição\t\t Jogador\t  Acertos\t|");
+        System.out.print("\tPosição\t\t Jogador\t  Acertos\t|");
+        System.out.println("\tPosição\t\t Jogador\t  Acertos\t|");
+        System.out.print("|---------------------------------------|---------" +
+                "------------------------------|----------------------------" +
+                "-----------|\n");
+
+        for (int i = 0; i < totalJogadores; i+=9) {
+            limite = i + 3;
+            if (limite > totalJogadores) {
+                limite = totalJogadores;
+            }
+            for (int j = i; j < limite; j++) {
+                System.out.printf("|\t%4d\t%12s\t\t%2d\t\t", j + 1,
+                        inputJogadores[j],
+                        inputAcertos[j]);
+
+                if ((j + 3) < totalJogadores) {
+                    System.out.printf("|\t%4d\t%12s\t\t%2d\t\t", j + 4,
+                            inputJogadores[j + 3],
+                            inputAcertos[j + 3]);
+                }
+                if ((j + 6) < totalJogadores) {
+                    System.out.printf("|\t%4d\t%12s\t\t%2d\t\t", j + 7,
+                            inputJogadores[j + 6],
+                            inputAcertos[j + 6]);
+                }
+                System.out.print("|\n");
+
+                if ((j + 7) % 9 == 0 && j + 6 < totalJogadores) {
+                    System.out.print("|-------------------------------------" +
+                            "--|---------------------------------------|----" +
+                            "-----------------------------------|\n");
+
+                } else if ((j + 4) % 3 == 0 && j + 3 < totalJogadores) {
+                    System.out.print("|-------------------------------------" +
+                            "--|---------------------------------------|\n");
+
+                } else if ((j + 1) % 3 == 0 && j < totalJogadores) {
+                    System.out.print("|-------------------------------------" +
+                            "--|\n");
+                }
+            }
+        }
     }
 
     private static void imprimirCartelas(String[] jogadores,
@@ -245,7 +327,7 @@ public class projeto_bingo {
         for (int i = intervalo; i < (dezenasPorSorteio + intervalo); i++) {
             System.out.printf("%2d,", sorteioOrdenado[i]);
         }
-        System.out.print("} \t\t");
+        System.out.print("} \t");
     }
 
     public static void imprimirTop3(String[] rankigJogadores) {
@@ -254,7 +336,7 @@ public class projeto_bingo {
         for (int i = 0; i < 3; i++) {
             System.out.printf("%s, ", rankigJogadores[i]);
         }
-        System.out.print("*** \t\t");
+        System.out.print("***");
     }
 
     public static void imprimirVencedor(String[] rankigJogadores,
@@ -267,7 +349,7 @@ public class projeto_bingo {
 
         int ganhadores = 0;
 
-        System.out.print("*** B I N G O ! *** \t\t");
+        System.out.print("\t   *** B I N G O ! ***  \t");
 
         for (int i = 0; i < totalJogadores; i++) {
             if (acertos[i] >= dezenasPorCartela) {
@@ -285,7 +367,7 @@ public class projeto_bingo {
         for (int i = 0; i < ganhadores; i++) {
             System.out.printf("%s, ", rankigJogadores[i]);
         }
-        System.out.print("*** \t\t");
+        System.out.print("*** \t");
 
     }
 
