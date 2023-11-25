@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8fdc1d3d-9240-4b94-bfbc-2b92a7ce0aef" name="Changes" comment="optimize Bingo code">
+      <change afterPath="$PROJECT_DIR$/src/Aulas/Embaralhar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Aulas/tryCatch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BingoProject/MultiplayerBingo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TryCatch/AulaFinal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TryCatch/NumeroNegativo2Exception.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Desafios/MultiplayerBingo.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Desafios/projeto_bingo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desafios/projeto_bingo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,22 +42,22 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.projeto_bingo">
-    <configuration name="Divisao" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Aulas.Divisao" />
+}</component>
+  <component name="RunManager" selected="Application.MultiplayerBingo">
+    <configuration name="AulaFinal" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TryCatch.AulaFinal" />
       <module name="SerMaisTech-LP1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Aulas.*" />
+          <option name="PATTERN" value="TryCatch.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -60,37 +66,11 @@
       </method>
     </configuration>
     <configuration name="MultiplayerBingo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Desafios.MultiplayerBingo" />
+      <option name="MAIN_CLASS_NAME" value="BingoProject.MultiplayerBingo" />
       <module name="SerMaisTech-LP1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Desafios.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="aula_7_Matriz" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Desafios.aula_7_Matriz" />
-      <module name="SerMaisTech-LP1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Desafios.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="aula_7_matriz" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Desafios.aula_7_matriz" />
-      <module name="SerMaisTech-LP1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Desafios.*" />
+          <option name="PATTERN" value="BingoProject.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -111,13 +91,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="teste" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Desafios.teste" />
+      <module name="SerMaisTech-LP1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Desafios.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="tryCatch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Aulas.tryCatch" />
+      <module name="SerMaisTech-LP1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Aulas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.projeto_bingo" />
-        <item itemvalue="Application.aula_7_matriz" />
-        <item itemvalue="Application.aula_7_Matriz" />
         <item itemvalue="Application.MultiplayerBingo" />
-        <item itemvalue="Application.Divisao" />
+        <item itemvalue="Application.projeto_bingo" />
+        <item itemvalue="Application.AulaFinal" />
+        <item itemvalue="Application.tryCatch" />
+        <item itemvalue="Application.teste" />
       </list>
     </recent_temporary>
   </component>
@@ -202,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700688924182</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="optimize Bingo code">
+      <option name="closed" value="true" />
+      <created>1700701998896</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1700701998896</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

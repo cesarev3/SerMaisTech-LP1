@@ -1,102 +1,94 @@
-package Desafios;
+package BingoProject;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class projeto_bingo {
+public class MultiplayerBingo {
     public static void main(String[] args) {
-
-        printWelcomeScreen();
-
-        // receber nome dos jogadores em uma só entrada e separar
         Scanner readScanner = new Scanner(System.in);
-        String getNames = readScanner.nextLine();
-        String[] playerNames = getPlayerNames(getNames);
+        printWelcomeScreen();
+        String[] playersName = splitToString(getNames());
+        Arrays.sort(playersName);
 
         // variaveis de configuração e controle Globais;
         int tensUpperLimit = 60;
         int tensPerCard = 5;
-        int tensPerDrawn = 5;
-        int roundsOfDrawn = 0;
-        int numberOfPlayers = playerNames.length;
+        int tensPerDrawing = 5;
+        int roundsOfDrawing = 0;
+        int numberOfPlayers = playersName.length;
         int autoManualCardGeneratorMode = 0; // '0' Automático e '1' Manual
-        int autoManualDrawnMode = 0; // '0' Automático e '1' Manual
+        int autoManualDrawingMode = 0; // '0' Automático e '1' Manual
         int numberOfWinners = 0;
         int forIndex = 0;
-        int[] control = {tensUpperLimit, tensPerCard, tensPerDrawn,
-                roundsOfDrawn, numberOfPlayers, autoManualCardGeneratorMode,
-                autoManualDrawnMode, numberOfWinners, forIndex};
+        int cardDrawingTensMode = 0; // '0' Dezenas para cartela e '1' para Sorteio
+
+        int[] control = {tensUpperLimit, tensPerCard, tensPerDrawing,
+                roundsOfDrawing, numberOfPlayers, autoManualCardGeneratorMode,
+                autoManualDrawingMode, numberOfWinners, forIndex, cardDrawingTensMode};
 
         int[][] bingoCards = new int[numberOfPlayers][tensPerCard];
 
-        // seleciona o tipo de sorteio ou sair do jogo
+        // seleciona o tipo de Cartela ou sair do jogo
         String cardString = "Cartela Automática";
-        AutoManualMessage(cardString);
-
+        autoManualMessage(cardString);
         control[5] = autoManualSelect();
-        if(control[5] == 0) {
-             bingoCards = generateAutoBingoCard(control);
-             printBingoCards(playerNames, bingoCards, control);
-        } else {
-             bingoCards = generateManualBingoCard(control);
-             printBingoCards(playerNames, bingoCards, control);
-        }
+        control[9] = 0;
 
-        // gera as cartelas e imprime ao lado dos jogadores
+        if(control[5] == 0) bingoCards = generateBingoCards(control);
+        else bingoCards = splitToTens(splitToString(getTensToCards()), control);
+
         System.out.println("\n------------- Cartelas da Sorte --------------");
-
-        // realiza sorteio prévio e ordena por grupos de "dezenas por cartela"
-        int[] tensFromDrawn = generateAutoTensFromDrawn(control);
-        int[] tensFromDrawInAscendingOrder = sortTensInAscendingOrder(
-                tensFromDrawn, control);
+        printBingoCards(playersName, bingoCards, control);
 
         // seleciona o tipo de sorteio ou sair do jogo
-        String drawnString = "Sorteio Automático";
-        AutoManualMessage(drawnString);
-
+        String drawingString = "Sorteio Automático";
+        autoManualMessage(drawingString);
         control[6] = autoManualSelect();
-
+        control[9] = 1;
 
         // Arrays fora do While para poderem ser utilizadas no relatório final
         String[] playersRank = new String[numberOfPlayers];
         int[] numberOfMatchesFromPlayer = new int[numberOfPlayers];
-
-//        System.out.println("\n\n---------------- Sorteando -----------------");
+        int[][] bingoCardsChecked = new int[numberOfPlayers][tensPerCard];
+        int[] drawingTens = new int[tensPerDrawing];
+        int[] autoDrawingTens = generateSetOfTensFromDrawing(control);
 
         // inicia o módulo de sorteio de dezenas a cada rodada
         int toContinue = 'S';
         int numberOfRounds = 0;
         while (toContinue != 'X') {
             System.out.println("--------------- Sorteando ----------------\n");
-
             control[3] = numberOfRounds;
 
+            if (control[6] == 1) {
+                drawingTens = generateDrawingTens(control);
+            }
+
             // Confere as cartelas, calcula o número de acertos e faz ranking
-            int[][] bingoCardsChecked = matchTensFromDrawnOnBingoCards(
-                    bingoCards, tensFromDrawn, control);
-            numberOfMatchesFromPlayer = calculateNumberOfMatchesPerPlayer(
+            bingoCardsChecked = matchDrawingWithCards(bingoCards,
+                    autoDrawingTens, control);
+            numberOfMatchesFromPlayer = sumMatchesPerPlayer(
                     bingoCardsChecked, control);
-            playersRank = sortPlayersInAscendingOrder(playerNames,
+            playersRank = sortInAscendingOrder(playersName,
                     numberOfMatchesFromPlayer, control);
 
             // imprime as dezenas sorteadas e os jogadores no Top 3
-            printTensFromDrawn(tensFromDrawInAscendingOrder, control);
+            printDrawingTens(autoDrawingTens, control);
             printTop3Players(playersRank);
 
             // testa e imprime ganhadores completando a página do sorteio
             boolean haveAWinner = checkNumberOfWinners(numberOfMatchesFromPlayer,
                     control);
             if (haveAWinner) {
-                printWinnersOnDrawnScreen(playersRank, control);
-                printPlayersAndCardsChecked(playerNames, bingoCards,
+                printWinnersOnDrawingScreen(playersRank, control);
+                printPlayersAndCardsChecked(playersName, bingoCards,
                         bingoCardsChecked, numberOfMatchesFromPlayer, control);
                 break;
             }
 
             // imprime a página do sorteio a cada rodada
-            printPlayersAndCardsChecked(playerNames, bingoCards,
+            printPlayersAndCardsChecked(playersName, bingoCards,
                     bingoCardsChecked, numberOfMatchesFromPlayer, control);
 
             numberOfRounds ++;
@@ -107,7 +99,7 @@ public class projeto_bingo {
             toContinue = Character.toUpperCase(readScanner.next().charAt(0));
         }
 
-        // garante que o jogo seja abortado após sair do while na opção X
+// garante que o jogo seja abortado após sair do while na opção X
         if (toContinue == 'X') {
             System.exit(0);
         }
@@ -125,15 +117,15 @@ public class projeto_bingo {
 
         // associa os Vencedores ranqueados a suas cartelas (ajuste de indice)
         int[][] bingoCardsFromWinners = associateWinnersToTheirCards(playersRank,
-                playerNames, bingoCards, control);
+                playersName, bingoCards, control);
 
         // imprime rodadas, vencedores com cartelas e todas dezenas sorteadas
         System.out.println("\nNumero de rodadas: " + (numberOfRounds + 1));
         System.out.println("\nGanhadores:");
         printWinnersAndCardsOnReportScreen(playersRank, bingoCardsFromWinners,
                 control);
-        printAllTensDrawnOnFinalReport(numberOfRounds, tensPerDrawn,
-                tensFromDrawInAscendingOrder);
+        printAllDrawingTensOnFinalReport(numberOfRounds, tensPerDrawing,
+                autoDrawingTens);
 
         // imprime o ranking geral em 3 colunas
         System.out.println("\nRanking geral:");
@@ -141,11 +133,18 @@ public class projeto_bingo {
 
         // mensagem de agradecimento ao usuário
         System.out.println("\nObrigado por jogar!");
-
         readScanner.close();
 
-    }
 
+
+
+
+
+
+
+
+
+    }
     private static void printWelcomeScreen() {
         System.out.println("|-----------------------------------------------" +
                 "--------------------|");
@@ -158,22 +157,54 @@ public class projeto_bingo {
         System.out.println("|-----------------------------------------------" +
                 "--------------------|");
         System.out.println("\nHora de chamar seus colegas!");
-        System.out.println("\nDigite o primeiro nome de todos na mesma linha" +
-                " e use '-' entre eles");
-        System.out.println("Ex. Ana-Carlos-Marcola-Paula");
-        System.out.print("> ");
     }
 
-    public static String[] getPlayerNames(String getNames) {
-        String[] playerNames = getNames.split("-");
-        Arrays.sort(playerNames);
-        System.out.println("total de jogadores: " + playerNames.length);
-        System.out.println("Jogadores ordenados por ordem alfabética");
-        return playerNames;
+    public static String getNames() {
+        Scanner readScanner = new Scanner(System.in);
+        EntryMessages message = EntryMessages.GETNAMES;
+        System.out.print(message.getUserMessage());
+        return readScanner.nextLine();
     }
 
-    private static void AutoManualMessage(String module) {
-        System.out.println("\nTecle 'A' para  " + module +
+    public static String getTensToCards() {
+        Scanner readScanner = new Scanner(System.in);
+        EntryMessages message = EntryMessages.GETTENS;
+        System.out.print(message.getUserMessage());
+        return readScanner.nextLine();
+    }
+
+    public static String getTensToDrawing() {
+        Scanner readScanner = new Scanner(System.in);
+        EntryMessages message = EntryMessages.GETDRAWING;
+        System.out.print(message.getUserMessage());
+        return readScanner.nextLine();
+    }
+
+    public static String[] splitToString(String inputString) {
+        //String inputString = getNames();
+        String[] outputString = inputString.split("-");
+        System.out.println("total de registros: " + outputString.length);
+        return outputString;
+    }
+
+    public static int[][] splitToTens(String[] inputTensString, int[] control) {
+        int maxLines = inputTensString.length;
+        int tensPerCard = control[1];
+        String[] scratchArea = new String[tensPerCard];
+        int[][] outputTensSplited = new int[maxLines][tensPerCard];
+
+        for (int i = 0; i < maxLines; i++) {
+            scratchArea = inputTensString[i].split(",");
+            for (int j = 0; j < tensPerCard; j++) {
+                outputTensSplited[i][j] = Integer.parseInt(scratchArea[j]);
+            }
+            Arrays.sort(outputTensSplited[i]);
+        }
+        return outputTensSplited;
+    }
+
+    private static void autoManualMessage(String mode) {
+        System.out.println("\nTecle 'A' para  " + mode +
                 ", 'M' para Manual ou 'X' para sair");
         System.out.print("> ");
     }
@@ -199,46 +230,11 @@ public class projeto_bingo {
         return control;
     }
 
-    public static int[][] generateAutoBingoCard(int[] control) {
-        int tensPerCard = control[1];
-        int numberOfPlayers = control[4];
-        int[][] outputBingoCards = new int[numberOfPlayers][tensPerCard];
-
-        for (int i = 0; i < numberOfPlayers; i++) {
-            Integer[] inputTens = autoGenerateSingleTens(control);
-            for (int j = 0; j < tensPerCard; j++) {
-                outputBingoCards[i][j] = inputTens[j];
-            }
-            Arrays.sort(outputBingoCards[i]);
-        }
-        return outputBingoCards;
-    }
-
-    public static Integer[] autoGenerateSingleTens(int[] control) {
-        Random random = new Random();
-
-        int tensUpperLimit = control[0];
-        int tensPerCard = control[1];
-        Integer[] outputTens = new Integer[tensPerCard];
-        List<Integer> drawnList = Arrays.asList(outputTens);
-
-        for (int i = 0; i < tensPerCard; i++) {
-            while (true) {
-                int drawn = random.nextInt(tensUpperLimit) + 1;
-                if (!drawnList.contains(drawn)) {
-                    outputTens[i] = drawn;
-                    break;
-                }
-            }
-        }
-        return outputTens;
-    }
-
-    private static void printBingoCards(String[] playerNames,
+    private static void printBingoCards(String[] playersName,
                                         int[][] bingoCards,
                                         int[] control) {
-        for (int i = 0; i < playerNames.length; i++) {
-            System.out.printf("%11s = {", playerNames[i]);
+        for (int i = 0; i < playersName.length; i++) {
+            System.out.printf("%11s = {", playersName[i]);
             control[8] = i;
             printTo4Columns(bingoCards, control);
             if ((i + 1) % 4 == 0) {
@@ -263,27 +259,37 @@ public class projeto_bingo {
         }
     }
 
-    public static int[] generateAutoTensFromDrawn(int[] control) {
+    public static int[] autoGenerateRandomTens(int[] control) {
         Random random = new Random();
 
         int tensUpperLimit = control[0];
-        int[] inputTensToDrawn = loadContainerOfTensToDrawn(control);
-        int[] outputTensFromDrawn = new int[tensUpperLimit];
+        int tensPerCard = control[1];
+        int tensPerDrawing = control[2];
+        int cardDrawingMode = control[9];
+        int maxColumns = 5;
 
-        for (int i = 0; i < tensUpperLimit; i++) {
+        if (cardDrawingMode == 0) maxColumns = tensPerCard;
+        else maxColumns = tensUpperLimit;
+
+        int[] inputContainerOfTens = loadContainerOfTens(control);
+        int[] outputRandomTens = new int[maxColumns];
+
+        for (int i = 0; i < maxColumns; i++) {
             while (true) {
-                int toDrawn = random.nextInt(tensUpperLimit);
-                if (inputTensToDrawn[toDrawn] != 0) {
-                    outputTensFromDrawn[i] = inputTensToDrawn[toDrawn];
-                    inputTensToDrawn[toDrawn] = 0;
+                int containerIndex = random.nextInt(tensUpperLimit);
+                if (inputContainerOfTens[containerIndex] != 0) {
+                    outputRandomTens[i] = inputContainerOfTens[containerIndex];
+                    inputContainerOfTens[containerIndex] = 0;
                     break;
                 }
             }
         }
-        return outputTensFromDrawn;
+        if (cardDrawingMode == 0) Arrays.sort(outputRandomTens);
+
+        return outputRandomTens;
     }
 
-    public static int[] loadContainerOfTensToDrawn(int[] control) {
+    public static int[] loadContainerOfTens(int[] control) {
         int tensUpperLimit = control[0];
         int[] outputContainerOfTens = new int[tensUpperLimit];
 
@@ -293,28 +299,59 @@ public class projeto_bingo {
         return outputContainerOfTens;
     }
 
-    public static int[] sortTensInAscendingOrder(int[] tensFromDrawn,
-                                                 int[] control) {
-        int tensUpperLimit = control[0];
-        int tensPerDrawn = control[2];
-        int[] cacheArray = new int[tensPerDrawn];
-        int[] outputTensSorted = new int[tensUpperLimit];
+    public static int[][] generateBingoCards(int[] control) {
 
-        for (int i = 0; i < tensUpperLimit; i += tensPerDrawn) {
-            for (int j = 0; j < tensPerDrawn; j++) {
-                cacheArray[j] = tensFromDrawn[j + i];
+        int numberOfPlayers = control[4];
+        int tensPerCard = control[1];
+        int[] inputTensSet = new int[numberOfPlayers];
+        int[][] outputBingoCard = new int[numberOfPlayers][tensPerCard];
+
+        for (int i = 0; i < numberOfPlayers; i++) {
+            inputTensSet = autoGenerateRandomTens(control);
+            for (int j = 0; j < tensPerCard; j++) {
+                outputBingoCard[i][j] = inputTensSet[j];
+            }
+        }
+        return outputBingoCard;
+    }
+
+    public static int[] generateSetOfTensFromDrawing(int[] control) {
+        int tensUpperLimit = control[0];
+        int tensPerDrawing = control[2];
+        int[] cacheArray = new int[tensPerDrawing];
+        int[] outputTensSorted = new int[tensUpperLimit];
+        int[] tensFromDrawing = autoGenerateRandomTens(control);
+
+        for (int i = 0; i < tensUpperLimit; i += tensPerDrawing) {
+            for (int j = 0; j < tensPerDrawing; j++) {
+                cacheArray[j] = tensFromDrawing[j + i];
             }
             Arrays.sort(cacheArray);
-            for (int k= 0; k < tensPerDrawn; k++) {
+            for (int k= 0; k < tensPerDrawing; k++) {
                 outputTensSorted[k + i] = cacheArray[k];
             }
         }
         return outputTensSorted;
     }
 
-    public static int[][] matchTensFromDrawnOnBingoCards(int[][] bingoCards,
-                                                         int[] tensFromDrawn,
-                                                         int[] control) {
+    public static int[] generateDrawingTens(int[] control) {
+        int tensUpperLimit = control[0];
+        int tensPerDrawn = control[2];
+        int roundsFromDrawn = control[3];
+        int highLimit = (roundsFromDrawn + 1) * tensPerDrawn;
+        int lowLimit = roundsFromDrawn * tensPerDrawn;
+        int[] outputDrawingTens = new int[tensUpperLimit];
+        int[][] inpuDrawingTens = splitToTens(splitToString(getTensToDrawing()), control);
+
+        for (int i = lowLimit; i < highLimit; i++) {
+            outputDrawingTens[i] = inpuDrawingTens[0][i];
+        }
+        return outputDrawingTens;
+    }
+
+    public static int[][] matchDrawingWithCards(int[][] bingoCards,
+                                                int[] tensFromDrawn,
+                                                int[] control) {
         int tensPerCard = control[1];
         int tensPerDrawn = control[2];
         int roundsFromDrawn = control[3];
@@ -335,8 +372,8 @@ public class projeto_bingo {
         return outputCheckedTensFromDrawn;
     }
 
-    public static int[] calculateNumberOfMatchesPerPlayer(int[][] bingoCardsChecked,
-                                                          int[] control) {
+    public static int[] sumMatchesPerPlayer(int[][] bingoCardsChecked,
+                                            int[] control) {
         int numberOfPlayers = control[4];
         int[] outputNumberOfMatchesPerPlayer = new int[numberOfPlayers];
 
@@ -350,9 +387,9 @@ public class projeto_bingo {
         return outputNumberOfMatchesPerPlayer;
     }
 
-    public static String[] sortPlayersInAscendingOrder(String[] playerNames,
-                                                       int[] totalMatchesPerPlayer,
-                                                       int[] control) {
+    public static String[] sortInAscendingOrder(String[] playerNames,
+                                                int[] totalMatchesPerPlayer,
+                                                int[] control) {
         int numberOfPlayers = control[4];
         String[] scratchPlayers = new String[numberOfPlayers];
         int[] scratchMatches = new int[numberOfPlayers];
@@ -376,15 +413,15 @@ public class projeto_bingo {
         return scratchPlayers;
     }
 
-    public static void printTensFromDrawn(int[] tensFromDrawnInAscendingOrder,
-                                          int[] control) {
+    public static void printDrawingTens(int[] sortInAscendingOrder,
+                                        int[] control) {
         int tensPerDrawn = control[2];
         int roundsOfDrawn = control[3];
         int interval = roundsOfDrawn * tensPerDrawn;
 
         System.out.printf("Rodada %d = {", (roundsOfDrawn + 1));
         for (int i = interval; i < (tensPerDrawn + interval); i++) {
-            System.out.printf("%2d,", tensFromDrawnInAscendingOrder[i]);
+            System.out.printf("%2d,", sortInAscendingOrder[i]);
         }
         System.out.print("} \t");
     }
@@ -413,8 +450,8 @@ public class projeto_bingo {
         else return false;
     }
 
-    public static void printWinnersOnDrawnScreen(String[] playersRank,
-                                                 int[] control) {
+    public static void printWinnersOnDrawingScreen(String[] playersRank,
+                                                   int[] control) {
         int numberOfWinners = control[7];
 
         System.out.print("\t   *** B I N G O ! ***  \t");
@@ -433,7 +470,7 @@ public class projeto_bingo {
     private static void printPlayersAndCardsChecked(String[] playerNames,
                                                     int[][] bingoCards,
                                                     int[][] bingoCardsChecked,
-                                                    int[] cardsMatchWithDrawn,
+                                                    int[] cardsMatchWithDrawing,
                                                     int[] control) {
         int numberOfPlayers = control[4];
         System.out.println("\n");
@@ -454,7 +491,7 @@ public class projeto_bingo {
 
             String info = "acertos";
             for (int i = k; i < blocksOf4; i++) {
-                System.out.printf("%3d %7s = {", cardsMatchWithDrawn[i], info);
+                System.out.printf("%3d %7s = {", cardsMatchWithDrawing[i], info);
                 control[8] = i;
                 printTo4Columns(bingoCardsChecked, control);
                 System.out.print("\t");
@@ -462,16 +499,6 @@ public class projeto_bingo {
             System.out.println("\n ");
         }
     }
-
-//    public static String[] REVISARprintWinnersOnReportScreen(String[] playersRank, int[] control) {
-//        int numberOfWinners = control[7];
-//        String[] winners = new String[numberOfWinners];
-//
-//        for (int i = 0; i < numberOfWinners; i++) {
-//            winners[i] = playersRank[i];
-//        }
-//        return winners;
-//    }
 
     public static int[][] associateWinnersToTheirCards(String[] playersRank,
                                                        String[] playersName,
@@ -501,7 +528,7 @@ public class projeto_bingo {
     }
 
     private static void printWinnersAndCardsOnReportScreen(String[] playersRank,
-                                                           int[][] cartelasVencedores,
+                                                           int[][] winnersCard,
                                                            int[] control) {
         int tensPerCard = control[1];
         int numberOfWinners = control[7];
@@ -510,9 +537,9 @@ public class projeto_bingo {
             System.out.print(playersRank[i] + " = {");
             for (int j = 0; j < tensPerCard; j++) {
                 if (j < (tensPerCard -1)) {
-                    System.out.print(cartelasVencedores[i][j] + ", ");
+                    System.out.print(winnersCard[i][j] + ", ");
                 } else {
-                    System.out.print(cartelasVencedores[i][j] + "}");
+                    System.out.print(winnersCard[i][j] + "}");
                 }
             }
             System.out.print("\n");
@@ -534,14 +561,14 @@ public class projeto_bingo {
         return matchesRank;
     }
 
-    private static void printAllTensDrawnOnFinalReport(int rodadas,
-                                                       int dezenasPorSorteio,
-                                                       int[] dezenasOrdenadas) {
-        int limite = (rodadas + 1) * dezenasPorSorteio;
+    private static void printAllDrawingTensOnFinalReport(int numberOfRounds,
+                                                         int tensPerDrawing,
+                                                         int[] sortingTens) {
+        int limite = (numberOfRounds + 1) * tensPerDrawing;
         int[] totalDezenasSorteadas = new int[limite];
 
         for (int i = 0; i < (limite); i++) {
-            totalDezenasSorteadas[i] = dezenasOrdenadas[i];
+            totalDezenasSorteadas[i] = sortingTens[i];
         }
         Arrays.sort(totalDezenasSorteadas);
 
@@ -612,38 +639,24 @@ public class projeto_bingo {
             }
         }
     }
-    // área de métodos manuais
-    public static String getCards() {
-        Scanner readScanner = new Scanner(System.in);
 
-        System.out.println("\nDigite cada dezena separada por ',' e use '-' " +
-                "para separar as cartelas");
-        System.out.println("Ex. 1,2,3,4,5-2,3,4,5,6-3,4,5,6,7");
-        System.out.print("> ");
-        return readScanner.nextLine();
-    }
-    public static String[] getCardTens(String getCards) {
-        String[] cards = getCards.split("-");
-        //Arrays.sort(cards);
-        System.out.println("total de cartelas: " + cards.length);
-        return cards;
-    }
+    public enum EntryMessages {
+        GETNAMES("\nDigite o primeiro nome de todos na mesma linha" +
+                " e use '-' entre eles\nEx. Ana-Carlos-Marcola-Paula\n> "),
+        GETTENS("\nDigite cada dezena separada por ',' e use '-' " +
+                "para separar as cartelas\nEx. \"1,2,3,4,5-2,3,4,5,6-3,4," +
+                "5,6,7\"\n> "),
+        GETDRAWING("\nDigite as  dezenas do sorteio separadas por ',' " +
+                "para separar uma\nEx. \"1,20,13,45,5\n> ");
 
-    public static int[][] generateManualBingoCard(int[] control) {
+        String userMessage;
 
-        int tensPerCard = control[1];
-        int numberOfPlayers = control[4];
-        String[] cardTens = getCardTens(getCards());
-        String[] scratchArea = new String[tensPerCard];
-        int[][] outputBingoCards = new int[numberOfPlayers][tensPerCard];
-
-        for (int i = 0; i < numberOfPlayers; i++) {
-            scratchArea = cardTens[i].split(",");
-            for (int j = 0; j < tensPerCard; j++) {
-                outputBingoCards[i][j] = Integer.parseInt(scratchArea[j]);
-            }
-            Arrays.sort(outputBingoCards[i]);
+        EntryMessages(String s) {
+            this.userMessage = s;
         }
-        return outputBingoCards;
+
+        public String getUserMessage() {
+            return userMessage;
+        }
     }
 }
